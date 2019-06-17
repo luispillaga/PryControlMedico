@@ -1,10 +1,11 @@
 package com.medico.app.web.models.entities;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,13 +18,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="RECETA")
-public class Receta implements Serializable {
-	
+public class Receta implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -32,27 +34,31 @@ public class Receta implements Serializable {
 	@Column(name = "IDRECETA")
 	private Integer idreceta;
 	
-	@Column(name = "NACIMIENTO")
+	@Column(name = "FECHA")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Calendar fecha;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Past
+	private Date fecha;
 	
-	@JoinColumn(name="IDMEDICO", referencedColumnName="IDPERSONA")
+	@JoinColumn(name="IDMEDICO", referencedColumnName = "IDPERSONA")
 	@ManyToOne
 	private Medico medico;
-		
-	@JoinColumn(name="IDPACIENTE", referencedColumnName="IDPERSONA")
+	
+	@JoinColumn(name="IDPACIENTE", referencedColumnName = "IDPERSONA")
 	@ManyToOne
 	private Paciente paciente;
 	
-	@OneToMany(mappedBy="receta", fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "IDRECETA")
 	private List<DetalleReceta> detalles;
-		
-	public Receta() {		
-	}
 	
-	public Receta(Integer id) {
-		this.idreceta = id;
+	public Receta() {
+		
+	}
+
+	public Receta(Integer idreceta) {
+		super();
+		this.idreceta = idreceta;
 	}
 
 	public Integer getIdreceta() {
@@ -63,11 +69,11 @@ public class Receta implements Serializable {
 		this.idreceta = idreceta;
 	}
 
-	public Calendar getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Calendar fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
@@ -86,9 +92,13 @@ public class Receta implements Serializable {
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
-	
-	
-	
-	
 
+	public List<DetalleReceta> getDetalles() {
+		return detalles;
+	}
+
+	public void setDetalles(List<DetalleReceta> detalles) {
+		this.detalles = detalles;
+	}
+	
 }
