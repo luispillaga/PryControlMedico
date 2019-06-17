@@ -1,7 +1,8 @@
 package com.medico.app.web.controllers;
 
 import com.medico.app.web.models.entities.Dosis;
-import com.medico.app.web.models.services.IDosisService;
+import com.medico.app.web.models.entities.Medico;
+import com.medico.app.web.models.service.IDosisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping(value="/dosis")
+@RequestMapping(value = "/dosis")
 public class DosisController {
 
     @Autowired
@@ -25,30 +26,30 @@ public class DosisController {
         model.addAttribute("dosis",dosis);
         return "dosis/form";
     }
-    @PostMapping(value="/save" )
-    public String save(Dosis dosis,Model model){
-        try{
-            service.save(dosis);
-        }catch (Exception ex){
-            model.addAttribute("error: ",ex.toString());
-        }
-        return "redirect:/dosis/list";
-    }
 
-    @GetMapping(value="/retrieve/{id}" )
-    public String retrieve(@PathVariable(value = "id") Integer id,
-                           Model model){
-        Dosis dosis=service.findById(id);
-        model.addAttribute("dosis",dosis);
+    @GetMapping(value = "/retrive/{id}")
+    public String retrive(@PathVariable(value = "id")Integer id, Model model){
+        Dosis dosis = service.findById(id);
+        model.addAttribute("dosis", dosis);
         return "dosis/card";
     }
 
-    @GetMapping(value="/update/{id}" )
-    public String update(@PathVariable(value = "id") Integer id,
-                         Model model){
-        Dosis dosis=service.findById(id);
-        model.addAttribute("dosis",dosis);
+
+    @GetMapping(value = "/update/{id}")
+    public String update(@PathVariable(value = "id")Integer id, Model model){
+        Dosis dosis = service.findById(id);
+        model.addAttribute("dosis", dosis);
         return "dosis/form";
+    }
+
+    @PostMapping(value = "/save")
+    public String save(Dosis dosis, Model model){
+        try {
+            service.save(dosis);
+        }catch (Exception ex){
+            model.addAttribute("error", ex.toString());
+        }
+        return "redirect:/dosis/list";
     }
 
     @GetMapping(value="/delete" )
@@ -62,10 +63,11 @@ public class DosisController {
         return "redirect:/dosis/list";
     }
 
-    @GetMapping(value="/list" )
+    @GetMapping(value = "/list")
     public String list(Model model){
-        List<Dosis> dosiss=service.findAll();
-        model.addAttribute("lista",dosiss);
+        List<Dosis> listaDosis = service.findAll();
+        model.addAttribute("listaDosis", listaDosis);
         return "dosis/list";
     }
+
 }

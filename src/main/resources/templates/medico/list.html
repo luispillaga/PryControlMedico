@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+	<header th:replace="layout :: header"></header>
+	
+	<div class="container">
+		<br />
+		<div class="card col-md-12">
+			<div class="card-body">
+				<div class="form-group row">
+					<div class="content col-sm-1">
+						<i class="far fa-plus-square fa-2x"></i>
+					</div>
+					<h3 class="card-title col-sm-6" th:text="${title}"></h3>
+					<div class="col-sm-4"></div>
+				</div>
+				<hr />
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th><i class="fas fa-id-card"></i>&nbsp;Cédula</th>
+							<th><i class="fas fa-user-md"></i>&nbsp;Médico</th>
+							<th><i class="fas fa-mobile"></i>&nbsp;Teléfono</th>
+							<th><i class="fas fa-envelope"></i>&nbsp;Email</th>
+							<th><i class="fas fa-calendar"></i>&nbsp;Fecha de Nacimiento</th>
+							<th><i class="fas fa-id-badge"></i>&nbsp;Licencia</th>
+							<th><i class="fas fa-user-tie"></i>&nbsp;Especialidad</th>
+							<th><a class="btn btn-sm btn-success" th:href="@{/medico/create}"><i class="fas fa-plus"></i>&nbsp;Nuevo</a></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="medico : ${medicos}">
+							<td th:text="${medico.cedula}"></td>
+							<td th:text="${medico.nombre} + ' ' + ${medico.apellido}"></td>
+							<td th:text="${medico.telefono}"></td>
+							<td th:text="${medico.email}"></td>
+							<td th:text="${medico.nacimiento}"></td>
+							<td th:text="${medico.licencia}"></td>
+							<td th:text="${medico.especialidad}"></td>
+							<td>
+								<a class="btn btn-sm btn-warning" title="Editar" th:href="@{/medico/update/} + ${medico.idPersona}">
+									<i class="fas fa-edit"></i>
+								</a>
+								<a class="btn btn-sm btn-primary" title="Ver" th:href="@{/medico/retrive/} + ${medico.idPersona}">
+									<i class="fas fa-eye"></i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+				
+	<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

@@ -1,126 +1,120 @@
 package com.medico.app.web.models.entities;
 
-import java.util.Calendar;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 @MappedSuperclass
 public abstract class Persona {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@Column(name = "IDPERSONA")
-	private Integer idpersona;
-	
-	@Size(max = 15)
-	@Column(name = "CEDULA")
-	private String cedula;
-	
-	@Size(max = 35)
-	@Column(name = "NOMBRES")
-	@NotEmpty
-	private String nombre;
-	
-	@Size(max = 35)
-	@Column(name = "APELLIDOS")
-	@NotEmpty
-	private String apellido;
-	
-	@Column(name = "NACIMIENTO")
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Calendar nacimiento;
-	
-	@Size(max = 15)
-	@Column(name = "TELÉFONO")
-	@NotEmpty
-	private String telefono;
-	
-	@Size(max = 35)
-	@Column(name = "EMAIL")
-	@NotEmpty
-	@Email
-	private String email;
-	
-	public Persona() {
-		super();
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "IDPERSONA")
+    private Integer idPersona;
 
-	public Persona(Integer idpersona) {
-		super();
-		this.idpersona = idpersona;
-	}
+    @Size(max = 10)
+    @Column(name = "CEDULA")
+    @NotEmpty
+    private String cedula;
 
-	public Integer getIdpersona() {
-		return idpersona;
-	}
+    @Size(max = 40)
+    @Column(name = "NOMBRE")
+    @NotEmpty
+    private String nombre;
 
-	public void setIdpersona(Integer idpersona) {
-		this.idpersona = idpersona;
-	}
+    @Size(max = 40)
+    @Column(name = "APELLIDO")
+    @NotEmpty
+    private String apellido;
 
-	public String getCedula() {
-		return cedula;
-	}
+    @Column(name = "NACIMIENTO")
+    @Past
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date nacimiento;
 
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
-	}
+    @Size(max = 15)
+    @Column(name = "TELEFONO")
+    @NotEmpty
+    private String telefono;
 
-	public String getNombre() {
-		return nombre;
-	}
+    @Size(max = 35)
+    @Column(name = "EMAIL")
+    @NotEmpty
+    @Email
+    private String email;
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public Persona() {
+    }
 
-	public String getApellido() {
-		return apellido;
-	}
+    public Persona(Integer idPersona){
+        this.idPersona = idPersona;
+    }
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+    public Integer getIdPersona() {
+        return idPersona;
+    }
 
-	public Calendar getNacimiento() {
-		return nacimiento;
-	}
+    public void setIdPersona(Integer idPersona) {
+        this.idPersona = idPersona;
+    }
 
-	public void setNacimiento(Calendar nacimiento) {
-		this.nacimiento = nacimiento;
-	}
+    public String getCedula() {
+        return cedula;
+    }
 
-	public String getTelefono() {
-		return telefono;
-	}
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getApellido() {
+        return apellido;
+    }
 
-	
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-	
+    public Date getNacimiento() {
+        return nacimiento;
+    }
+
+    public void setNacimiento(Date nacimiento) {
+        this.nacimiento = nacimiento;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " " + apellido;
+    }
 }

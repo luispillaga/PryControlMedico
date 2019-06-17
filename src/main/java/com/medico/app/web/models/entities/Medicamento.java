@@ -1,122 +1,118 @@
 package com.medico.app.web.models.entities;
 
+import net.bytebuddy.implementation.bind.annotation.Empty;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
-
 @Entity
-@Table(name="MEDICAMENTO")
+@Table(name = "MEDICAMENTO")
 public class Medicamento implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -1435002172723564312L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@Column(name = "IDMEDICAMENTO")
-	private Integer idmedicamento;
-		
-	@Column(name = "COMPONENTEACTIVO")
-	@Size(max = 65)
-	private String componenteActivo;
-	
-	@Column(name = "VIAADMINISTRACION")
-	@Size(max = 255)
-	private String viaAdministracion;
-	
-	@Column(name = "NOMBRECOMERCIAL")
-	@Size(max = 255)
-	private String nombreComercial;
-	
-	@Column(name = "PRECIO")
-	private float precio;
-	
-	@Column(name = "CONCENTRACION")
-	@Size(max = 255)
-	private String concentracion;
-	
-	@OneToMany(mappedBy="medicamento", fetch=FetchType.LAZY)
-	private List<DetalleReceta> detalles;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "IDMEDICAMENTO")
+    private Integer idMedicamento;
 
-	public Medicamento() {
-		super();
-	}
+    @Column(name = "COMPONENTEACTIVO")
+    @Size(max = 255)
+    private String componenteActivo;
 
-	public Medicamento(Integer idmedicamento) {
-		super();
-		this.idmedicamento = idmedicamento;
-	}
+    @Column(name = "CONCENTRACION")
+    @Size(max = 35)
+    @NotEmpty
+    private String concentracion;
 
-	public Integer getIdmedicamento() {
-		return idmedicamento;
-	}
-	
-	public String getComponenteActivo() {
-		return componenteActivo;
-	}
+    @Column(name = "NOMBRECOMERCIAL")
+    @Size(max = 65)
+    @NotEmpty
+    private String nombreComercial;
 
-	public void setComponenteActivo(String componenteActivo) {
-		this.componenteActivo = componenteActivo;
-	}
+    @Column(name = "PRECIO")
+    @Digits(integer=8, fraction=2)
+    private float precio;
 
-	public void setIdmedicamento(Integer idmedicamento) {
-		this.idmedicamento = idmedicamento;
-	}
+    @Column(name = "FECHACADUCIDAD")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date fechaCaducidad;
 
-	public String getViaAdministracion() {
-		return viaAdministracion;
-	}
+    @JoinColumn(name="IDVIAADMINISTRACION", referencedColumnName = "IDVIAADMINISTRACION")
+    @ManyToOne
+    private ViaAdministracion viaAdministracion;
 
-	public void setViaAdministracion(String viaAdministracion) {
-		this.viaAdministracion = viaAdministracion;
-	}
+    public Medicamento() {
+        super();
+    }
 
-	public String getNombreComercial() {
-		return nombreComercial;
-	}
+    public Medicamento(Integer idMedicamento) {
+        super();
+        this.idMedicamento = idMedicamento;
+    }
 
-	public void setNombreComercial(String nombreComercial) {
-		this.nombreComercial = nombreComercial;
-	}
+    public Integer getIdMedicamento() {
+        return idMedicamento;
+    }
 
-	public float getPrecio() {
-		return precio;
-	}
+    public void setIdMedicamento(Integer idMedicamento) {
+        this.idMedicamento = idMedicamento;
+    }
 
-	public void setPrecio(float precio) {
-		this.precio = precio;
-	}
+    public String getComponenteActivo() {
+        return componenteActivo;
+    }
 
-	public String getConcentracion() {
-		return concentracion;
-	}
+    public void setComponenteActivo(String componenteActivo) {
+        this.componenteActivo = componenteActivo;
+    }
 
-	public void setConcentracion(String concentracion) {
-		this.concentracion = concentracion;
-	}
+    public String getConcentracion() {
+        return concentracion;
+    }
 
-	public List<DetalleReceta> getDetalles() {
-		return detalles;
-	}
+    public void setConcentracion(String concentracion) {
+        this.concentracion = concentracion;
+    }
 
-	public void setDetalles(List<DetalleReceta> detalles) {
-		this.detalles = detalles;
-	}
-	
+    public String getNombreComercial() {
+        return nombreComercial;
+    }
 
-	
-	
+    public void setNombreComercial(String nombreComercial) {
+        this.nombreComercial = nombreComercial;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public Date getFechaCaducidad() {
+        return fechaCaducidad;
+    }
+
+    public void setFechaCaducidad(Date fechaCaducidad) {
+        this.fechaCaducidad = fechaCaducidad;
+    }
+
+    public ViaAdministracion getViaAdministracion() {
+        return viaAdministracion;
+    }
+
+    public void setViaAdministracion(ViaAdministracion viaAdministracion) {
+        this.viaAdministracion = viaAdministracion;
+    }
+
 }

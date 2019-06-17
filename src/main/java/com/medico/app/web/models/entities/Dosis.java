@@ -1,113 +1,84 @@
 package com.medico.app.web.models.entities;
 
-import java.io.Serializable;
-import java.util.Calendar;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.Calendar;
+import java.util.List;
 
 @Entity
-@Table(name="DOSIS")
+@Table(name = "DOSIS")
 public class Dosis implements Serializable {
 
+    private static final long serialVersionUID = 5590578722187637753L;
 
-	private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "IDDOSIS")
+    private Integer idDosis;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
-	@Column(name = "IDDOSIS")
-	private Integer iddosis;
-	
-	
-	@Column(name = "FECHAHORA")
-	@Temporal(TemporalType.DATE)
-	private Calendar fechaHora;
-	
-	@Column(name = "NUMERO")
-	@Min(value = 1)
-	private Integer numero;
-	
-	@Size(max = 255)
-	@Column(name = "DESCRIPCION")
-	private String descripcion;//justificacion de por qué se interrumpe el tratamiento
-	
-	@Column(name = "ESTADO")
-	@Min(value = 0)
-	private Integer estado;
-	
-	@JoinColumn(name="IDDETALLERECETA", referencedColumnName = "IDDETALLERECETA")
-	@ManyToOne
-	private DetalleReceta detalleReceta;
+    @Column(name = "FECHAHORA")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Calendar fechaHora;
 
-	public Dosis() {
-		super();
-	}
+    @Column(name = "NUMERO")
+    @Min(value = 1)
+    private Integer numero;
 
-	public Dosis(Integer iddosis) {
-		super();
-		this.iddosis = iddosis;
-	}
+    @Size(max = 255)
+    @Column(name = "DESCRIPCION")
+    private String descripcion;
 
-	public Integer getIddosis() {
-		return iddosis;
-	}
+    @Column(name = "ESTADO")
+    @Min(value = 0)
+    private Integer estado;
 
-	public void setIddosis(Integer iddosis) {
-		this.iddosis = iddosis;
-	}
+    public Dosis() {
+    }
 
-	public Calendar getFechaHora() {
-		return fechaHora;
-	}
+    public Integer getIdDosis() {
+        return idDosis;
+    }
 
-	public void setFechaHora(Calendar fechaHora) {
-		this.fechaHora = fechaHora;
-	}
+    public void setIdDosis(Integer idDosis) {
+        this.idDosis = idDosis;
+    }
 
-	public Integer getNumero() {
-		return numero;
-	}
+    public Calendar getFechaHora() {
+        return fechaHora;
+    }
 
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
+    public void setFechaHora(Calendar fechaHora) {
+        this.fechaHora = fechaHora;
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    public Integer getNumero() {
+        return numero;
+    }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
 
-	public Integer getEstado() {
-		return estado;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public void setEstado(Integer estado) {
-		this.estado = estado;
-	}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-	public DetalleReceta getDetalleReceta() {
-		return detalleReceta;
-	}
+    public Integer getEstado() {
+        return estado;
+    }
 
-	public void setDetalleReceta(DetalleReceta detalleReceta) {
-		this.detalleReceta = detalleReceta;
-	}
-	
-	
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
 
 }

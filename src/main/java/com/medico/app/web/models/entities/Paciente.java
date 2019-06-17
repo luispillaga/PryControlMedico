@@ -1,67 +1,58 @@
 package com.medico.app.web.models.entities;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-
 @Entity
-@Table(name="PACIENTE")
-public class Paciente extends Persona implements Serializable{
+@Table(name = "PACIENTE")
+public class Paciente extends Persona implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2323333995012370735L;
+    @Size(max = 500)
+    @Column(name = "ALERGIAS")
+    private String alergias;
 
-	@Size(max = 255)
-	@Column(name = "ALERGIAS")
-	@NotEmpty
-	private String alergias;
-	
-	@Size(max = 3)
-	@Column(name = "TIPOSANGRE")
-	@NotEmpty
-	private String tipoSangre;
-	
-	@OneToMany(mappedBy="paciente", fetch=FetchType.LAZY)//LAZY, trae los valores de los atributos y no todo el listado 
-	private List<Receta> recetas;
+    @Size(max = 5)
+    @Column(name = "TIPOSANGRE")
+    @NotEmpty
+    private String tipoSangre;
 
-	public Paciente() {
-		super();
-	}
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    private List<Receta> recetas;
 
-	public Paciente(Integer Id) {
-		super();
-		this.setIdpersona(Id);
-	}
+    public Paciente(){
 
-	public String getAlergias() {
-		return alergias;
-	}
+    }
 
-	public void setAlergias(String alergias) {
-		this.alergias = alergias;
-	}
+    public Paciente(Integer idPersona) {
+        super();
+        this.setIdPersona(idPersona);
+    }
 
-	public String getTipoSangre() {
-		return tipoSangre;
-	}
+    public String getAlergias() {
+        return alergias;
+    }
 
-	public void setTipoSangre(String tipoSangre) {
-		this.tipoSangre = tipoSangre;
-	}
+    public void setAlergias(String alergias) {
+        this.alergias = alergias;
+    }
 
-	public List<Receta> getRecetas() {
-		return recetas;
-	}
+    public String getTipoSangre() {
+        return tipoSangre;
+    }
 
-	public void setRecetas(List<Receta> recetas) {
-		this.recetas = recetas;
-	}
-	
-	
+    public void setTipoSangre(String tipoSangre) {
+        this.tipoSangre = tipoSangre;
+    }
+
+    public List<Receta> getRecetas() {
+        return recetas;
+    }
+
+    public void setRecetas(List<Receta> recetas) {
+        this.recetas = recetas;
+    }
 }
