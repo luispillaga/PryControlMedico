@@ -15,9 +15,10 @@ public class PacienteService implements IPacienteService {
 	private IPacienteDAO dao;
 	
 	@Override
-	public void save(Paciente paciente) {
+	public Paciente save(Paciente paciente) {
 		// TODO Auto-generated method stub
 		dao.save(paciente);
+		return paciente;
 	}
 
 	@Override

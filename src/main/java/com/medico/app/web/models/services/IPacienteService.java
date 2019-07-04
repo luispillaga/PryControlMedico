@@ -6,7 +6,7 @@ import com.medico.app.web.models.entities.Paciente;
 
 public interface IPacienteService {
 
-	public void save(Paciente paciente);
+	public Paciente save(Paciente paciente);
 	
 	public Paciente findById(Integer id);
 	
