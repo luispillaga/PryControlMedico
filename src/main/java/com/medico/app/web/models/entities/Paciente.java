@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -23,24 +24,21 @@ public class Paciente extends Persona implements Serializable{
 
 	@Size(max = 255)
 	@Column(name = "ALERGIAS")
-	@NotEmpty
 	private String alergias;
 	
 	@Size(max = 3)
 	@Column(name = "TIPOSANGRE")
-	@NotEmpty
 	private String tipoSangre;
 	
 	@Size(max = 255)
 	@Column(name = "ANTECEDENTES")
-	@NotEmpty
 	private String antecedentes;
 	
 	@Size(max = 25)
 	@Column(name = "CREADOPOR")
-	@NotEmpty
 	private String creadoPor;
-	
+
+    @JsonIgnore
 	@OneToMany(mappedBy="paciente", fetch=FetchType.LAZY)//LAZY, trae los valores de los atributos y no todo el listado 
 	private List<Receta> recetas;
 
