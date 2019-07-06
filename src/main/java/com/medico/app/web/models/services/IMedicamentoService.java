@@ -17,5 +17,8 @@ public interface IMedicamentoService {
 	public List<Medicamento> findByNombre(String criteria);
 	
 	public List<Medicamento> findByComponenteActivoLike(String criteria);
-
+	
+	public List<Medicamento> listMedicamentoByPaciente(String criteria);
+	
+	public List<Medicamento> findByPaciente(String criteria);
 }

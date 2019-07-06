@@ -51,4 +51,18 @@ public class MedicamentoService implements IMedicamentoService {
 		return (List<Medicamento>) dao.findAll();
 	}
 
+	@Override
+	@Transactional(readOnly=true)
+	public List<Medicamento> listMedicamentoByPaciente(String criteria) {
+		// TODO Auto-generated method stub
+		return dao.listMedicamentoByPaciente(criteria);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Medicamento> findByPaciente(String criteria) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
