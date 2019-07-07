@@ -1,6 +1,10 @@
 package com.medico.app.web.api;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.medico.app.web.models.entities.Medicamento;
+import com.medico.app.web.models.entities.Medico;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +23,18 @@ import com.medico.app.web.models.services.IMedicamentoService;
 @RequestMapping(value="/api")
 public class MedicamentoApiController {
 	 @Autowired
+	    private IMedicamentoService service;
+
+	    @GetMapping("/medicamentoxpaciente/{id}")
+	    public List<Medicamento> listMedicamentoByPaciente(@PathVariable String id) {
+	        return service.listMedicamentoByPaciente(id);
+	    }
+	   
+	    @GetMapping(value = "/find/{criteria}", produces = { "application/json" })
+		public @ResponseBody List<Medicamento> findByNombre(@PathVariable String criteria) {
+			return service.listMedicamentoByPaciente(criteria);
+		}
+	    
 	 private IMedicamentoService service;
 	 
 	 @GetMapping("/medicamento")
