@@ -18,6 +18,12 @@ public class PacienteApiController {
     public List<Paciente> list() {
         return service.findAll();
     }
+    
+    @GetMapping("/paciente-medicamento/{id}")
+    public List<Paciente> medicamentosByPaciente(@PathVariable Integer id) {
+        //return service.findallmedicamentobypaciente();
+    	return null;
+    }
 
     @GetMapping("/paciente/{id}")
     public Paciente retrieve(@PathVariable Integer id) {
