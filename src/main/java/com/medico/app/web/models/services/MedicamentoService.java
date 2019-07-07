@@ -17,8 +17,9 @@ public class MedicamentoService implements IMedicamentoService {
 	
 	@Override
 	@Transactional
-	public void save(Medicamento medicamento) {		
+	public Medicamento save(Medicamento medicamento) {		
 		dao.save(medicamento);
+		return medicamento; 
 	}
 
 	@Override
@@ -49,6 +50,11 @@ public class MedicamentoService implements IMedicamentoService {
 	@Transactional(readOnly=true)
 	public List<Medicamento> findByAll() {
 		return (List<Medicamento>) dao.findAll();
+	}
+
+	@Override
+	public List<Medicamento> findMedicamentos(Integer id) {
+		return (List<Medicamento>) dao.findMedicamentos(id);
 	}
 
 }

@@ -50,7 +50,12 @@ public class PacienteApiController {
         }else
             return service.save(paciente);
     }
-
+    
+    @GetMapping("/paciente/activos")
+    public List<Paciente> findPacientesActivos(){
+    	return service.findPacientesActivos();
+    }
+    
 
 
 }
