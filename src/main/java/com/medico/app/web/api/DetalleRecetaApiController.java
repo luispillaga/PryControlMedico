@@ -17,7 +17,7 @@ import com.medico.app.web.models.services.IRecetaService;
 @RequestMapping(value="/api")
 public class DetalleRecetaApiController {
 
-	 @Autowired
+	    @Autowired
 	    private IDetalleRecetaService service;
 
 	    @GetMapping("/detallereceta")
@@ -29,4 +29,9 @@ public class DetalleRecetaApiController {
 	    public DetalleReceta retrieve(@PathVariable Integer id) {
 	        return service.findById(id);
 	    }
+  
+      @GetMapping(value="/detallexreceta/{id}" )
+      public List<DetalleReceta> findAllOfOneRecipe(@PathVariable(value = "id") Integer id){
+        return service.findAllOfOneRecipe(id);
+      }
 }

@@ -17,4 +17,7 @@ public interface IDetalleRecetaDAO extends CrudRepository<DetalleReceta, Integer
     @Transactional
     @Query("update DetalleReceta D set D.activo = 'false' WHERE D.iddetalleReceta = ?1")
     public void setDetalleRecetaInactiveStatus(Integer id);
+    
+    @Query("SELECT D FROM DetalleReceta D WHERE D.receta.idreceta = ?1")
+    public List<DetalleReceta> findAllOfOneRecipe(Integer idReceta);
 }

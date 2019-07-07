@@ -6,7 +6,7 @@ import com.medico.app.web.models.entities.Dosis;
 
 public interface IDosisService {
 
-	public void save(Dosis dosis);
+	public Dosis save(Dosis dosis);
 
 	public void delete(Integer id);
 	
@@ -15,4 +15,6 @@ public interface IDosisService {
 	public List<Dosis> findAll();
 
 	public List<Dosis> findNotTakenPills(Integer idDetalleReceta);
+	
+	public List<Dosis> findAllOfOneDetail(Integer idDetalleReceta);
 }
