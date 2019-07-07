@@ -24,7 +24,7 @@ public class MedicamentoApiController {
 	    public List<Medicamento> list() {
 	        return service.findByAll();
 	    }
-	    @GetMapping("/medicameto-paciente/{id}")
+	    @GetMapping("/medicamentoxpaciente/{id}")
 	    public List<Medicamento> listMedicamentoByPaciente(@PathVariable String id) {
 	        return service.listMedicamentoByPaciente(id);
 	    }
