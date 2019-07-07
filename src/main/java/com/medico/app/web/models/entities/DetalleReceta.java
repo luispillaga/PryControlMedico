@@ -84,27 +84,28 @@ public class DetalleReceta implements Serializable {
 	
 	@JoinColumn(name="IDMEDICAMENTO", referencedColumnName = "IDMEDICAMENTO")//claves foraneas
 	@ManyToOne
-	@JsonIgnore
 	private Medicamento medicamento;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="IDRECETA")//claves foraneas
-	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="IDRECETA", referencedColumnName="IDRECETA")//claves foraneas
 	private Receta receta;
 
+	@JsonIgnore
 	@Transient
 	@JsonIgnore
 	private Integer medicamentoId;
 	
+	@JsonIgnore
 	@Transient
 	@JsonIgnore
 	private String descripcionTipoFrecuencia;
 	
+	@JsonIgnore
 	@Transient
 	@JsonIgnore
 	private String descripcionTipoDosis;
 
-	
+	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL) //creo la lista de dosis en detalles receta
 	@JoinColumn(name = "IDDETALLERECETA")
 	@JsonIgnore
