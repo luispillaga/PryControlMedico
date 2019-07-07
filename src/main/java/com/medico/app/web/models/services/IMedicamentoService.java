@@ -6,7 +6,7 @@ import com.medico.app.web.models.entities.Medicamento;
 
 public interface IMedicamentoService {
 	
-	public void save(Medicamento medicamento);
+	public Medicamento save(Medicamento medicamento);
 	
 	public Medicamento findById(Integer id);
 	
@@ -18,7 +18,9 @@ public interface IMedicamentoService {
 	
 	public List<Medicamento> findByComponenteActivoLike(String criteria);
 	
-	public List<Medicamento> listMedicamentoByPaciente(String criteria);
+	public List<Medicamento> findMedicamentos(Integer id);
+
+  public List<Medicamento> listMedicamentoByPaciente(String criteria);
 	
 	public List<Medicamento> findByPaciente(String criteria);
 }

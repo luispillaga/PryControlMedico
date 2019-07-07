@@ -39,4 +39,12 @@ public class PacienteService implements IPacienteService {
 		return (List<Paciente>) dao.findAll();
 	}
 
+	@Override
+	public List<Paciente> findPacientesActivos() {
+		return dao.findPacientesActivos();
+		//return (List<Paciente>) dao.findPacientesActivos();
+	}
+	
+	
+
 }
