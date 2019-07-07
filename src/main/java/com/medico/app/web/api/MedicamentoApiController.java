@@ -7,14 +7,7 @@ import com.medico.app.web.models.entities.Medicamento;
 import com.medico.app.web.models.entities.Medico;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.medico.app.web.models.entities.Medicamento;
 import com.medico.app.web.models.services.IMedicamentoService;
@@ -23,20 +16,13 @@ import com.medico.app.web.models.services.IMedicamentoService;
 @RequestMapping(value="/api")
 public class MedicamentoApiController {
 	 @Autowired
-	    private IMedicamentoService service;
-
-	    @GetMapping("/medicamentoxpaciente/{id}")
-	    public List<Medicamento> listMedicamentoByPaciente(@PathVariable String id) {
-	        return service.listMedicamentoByPaciente(id);
-	    }
-	   
-	    @GetMapping(value = "/find/{criteria}", produces = { "application/json" })
-		public @ResponseBody List<Medicamento> findByNombre(@PathVariable String criteria) {
-			return service.listMedicamentoByPaciente(criteria);
-		}
-	    
 	 private IMedicamentoService service;
-	 
+
+	 @GetMapping("/medicamentoxpaciente/{id}")
+	 public List<Medicamento> listMedicamentoByPaciente(@PathVariable String id) {
+	 	return service.listMedicamentoByPaciente(id);
+	 }
+
 	 @GetMapping("/medicamento")
 	 public List<Medicamento> list() {
 		 return service.findByAll();
@@ -72,7 +58,7 @@ public class MedicamentoApiController {
 			 return service.save(newMedicamento);
 	    }
 	 
-	 @GetMapping("/medicamentoxpaciente/{id}")
+	 @GetMapping("/medicamentoactivoxpaciente/{id}")
 	    public List<Medicamento> recetasActivas(@PathVariable Integer id){
 	    	return service.findMedicamentos(id);
 	    }

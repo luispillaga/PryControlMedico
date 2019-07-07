@@ -20,7 +20,7 @@ public interface IMedicamentoService {
 	
 	public List<Medicamento> findMedicamentos(Integer id);
 
-  public List<Medicamento> listMedicamentoByPaciente(String criteria);
+  	public List<Medicamento> listMedicamentoByPaciente(String criteria);
 	
 	public List<Medicamento> findByPaciente(String criteria);
 }
