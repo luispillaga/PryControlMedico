@@ -50,4 +50,8 @@ public class DetalleRecetaService implements IDetalleRecetaService {
 	public void setDetalleRecetaInactiveStatus(Integer id) {
 		dao.setDetalleRecetaInactiveStatus(id);
 	}
+	
+	public List<DetalleReceta> findAllOfOneRecipe(Integer idReceta){
+		return dao.findAllOfOneRecipe(idReceta);
+	}
 }

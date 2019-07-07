@@ -13,4 +13,6 @@ public interface IPacienteService {
 	public void delete(Integer id);
 	
 	public List<Paciente> findAll();
+	
+	public List<Paciente> findPacientesActivos();
 }
