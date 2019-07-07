@@ -27,7 +27,7 @@ public class WebController {
 
         JSONObject body = new JSONObject();
 //        body.put("to", "/topics/" + TOPIC);
-        body.put("to", "e-1jIZAODSc:APA91bG97CpZtLTlJmjwo1Q73YTT07Itkxatu9LblaFCLdGP9cPgcobS85R7s9qlxFAFnCDiVR2rID5Qboz3V-Swn5LBguUsSZylrdrH6vPhPJm4qP1VtVKOT4cuB25p1vcz1C5g4ZfL");
+        body.put("to", "Ingresar Token del dispositivo!");
         body.put("priority", "high");
 
         JSONObject notification = new JSONObject();
