@@ -94,7 +94,8 @@ public class Paciente extends Persona implements Serializable{
 	@PrePersist
     public void prePersist() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        creadoPor = auth.getName();        
+        creadoPor = auth.getName();
+        creadoEn = LocalDateTime.now();
     }
 	
 }
