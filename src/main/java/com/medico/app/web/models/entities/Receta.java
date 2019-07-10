@@ -25,6 +25,8 @@ import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="RECETA")
 public class Receta implements Serializable{
@@ -45,16 +47,20 @@ public class Receta implements Serializable{
 	@Column(name = "ACTIVO")
 	private Boolean activo;
 	
+	
 	@JoinColumn(name="IDMEDICO", referencedColumnName = "IDPERSONA")
 	@ManyToOne
 	private Medico medico;
 	
+
 	@JoinColumn(name="IDPACIENTE", referencedColumnName = "IDPERSONA")
 	@ManyToOne
 	private Paciente paciente;
 
-	@OneToMany(mappedBy = "receta", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToMany(mappedBy="receta", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<DetalleReceta> detalles;
+	
 	
 	public Receta() {
 		detalles = new ArrayList<DetalleReceta>();
