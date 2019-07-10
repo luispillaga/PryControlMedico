@@ -21,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -40,10 +42,11 @@ public class Receta implements Serializable{
 	@Column(name = "FECHA")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Past
+	@NotNull
 	private LocalDate fecha;
 	
 	@Column(name = "ACTIVO")
-	private Boolean activo;
+	private Boolean activo = true;
 	
 	@JoinColumn(name="IDMEDICO", referencedColumnName = "IDPERSONA")
 	@ManyToOne
