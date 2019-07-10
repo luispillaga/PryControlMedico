@@ -56,7 +56,6 @@ public class MedicoApiController {
         	medico1.setCedula(medico.getCedula());
             medico1.setTelefono(medico.getTelefono());
             medico1.setEmail(medico.getEmail());
-            medico1.setNacimiento(medico.getNacimiento());
             medico1.setLicencia(medico.getLicencia());
             medico1.setEspecialidad(medico.getEspecialidad());
             return service.save(medico1);

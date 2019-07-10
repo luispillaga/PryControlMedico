@@ -1,5 +1,7 @@
 package com.medico.app.web.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
