@@ -42,7 +42,8 @@ HELP.md
 *~
 .#*
 .*.md.html
-.DS_Store
+**/.DS_Store
+**/_DS_Store
 .classpath
 .factorypath
 .gradle

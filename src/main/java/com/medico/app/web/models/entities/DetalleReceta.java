@@ -1,5 +1,7 @@
 package com.medico.app.web.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -83,23 +86,26 @@ public class DetalleReceta implements Serializable {
 	@JoinColumn(name="IDMEDICAMENTO", referencedColumnName = "IDMEDICAMENTO")//claves foraneas
 	@ManyToOne
 	private Medicamento medicamento;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="IDRECETA")//claves foraneas
+
+	@ManyToOne
+	@JoinColumn(name="IDRECETA", referencedColumnName="IDRECETA")//claves foraneas
 	private Receta receta;
 
 	@Transient
+	@JsonIgnore
 	private Integer medicamentoId;
-	
+
 	@Transient
+	@JsonIgnore
 	private String descripcionTipoFrecuencia;
-	
+
 	@Transient
+	@JsonIgnore
 	private String descripcionTipoDosis;
 
-	
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL) //creo la lista de dosis en detalles receta
 	@JoinColumn(name = "IDDETALLERECETA")
+	@JsonIgnore
 	private List<Dosis> dosis;
 	
 	public DetalleReceta() {

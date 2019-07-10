@@ -9,6 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="DOSIS")
 public class Dosis implements Serializable {
@@ -36,12 +38,15 @@ public class Dosis implements Serializable {
 	@Column(name = "ESTADO")
 	@Min(value = 0)
 	private Integer estado = 0;
+	
+	
 
 	@Transient
 	private String descripcionEstadoDosis;
 
 	@JoinColumn(name="IDDETALLERECETA", referencedColumnName = "IDDETALLERECETA")//claves foraneas
 	@ManyToOne
+	@JsonIgnore
 	private DetalleReceta detalleReceta;
 
 	public Dosis() {
@@ -92,16 +97,26 @@ public class Dosis implements Serializable {
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+	
+	
+	
 
 	public String getDescripcionEstadoDosis() {
 		switch(this.estado) {
 			case 0:
 				return "Pendiente";
 			case 1:
-				return "Notificado";
+				return "Suministrado";
+			case 2: 
+				return "Rechazado";
 		}
 		return "";
 	}
+	
+	
+
+	
+	
 	public LocalDateTime calcularFechaSiguienteDosis(LocalDateTime fechaHoraDosisAnterior, int frecuencia, int tipoFrecuencia){
 		LocalDateTime fechaHoraNuevaDosis = fechaHoraDosisAnterior;
 		switch(tipoFrecuencia) {
