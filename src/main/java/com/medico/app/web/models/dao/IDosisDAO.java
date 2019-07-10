@@ -12,6 +12,9 @@ import java.util.List;
 public interface IDosisDAO extends CrudRepository<Dosis, Integer> {
     @Query("SELECT D FROM Dosis D WHERE D.detalleReceta.iddetalleReceta = ?1 AND D.estado = 0")
     public List<Dosis> findNotTakenPills(Integer idDetalleReceta);
+
+    @Query("SELECT D FROM Dosis D WHERE D.detalleReceta.iddetalleReceta = ?1")
+    public List<Dosis> findAllOfOneDetail(Integer idDetalleReceta);
     
     @Query("SELECT D FROM Dosis D WHERE D.estado = 1 AND D.fechaHora BETWEEN ?1 AND ?2")
     public List<Dosis> findAllSuppliedPillsByDateRange(LocalDateTime firtsDate, LocalDateTime nextDate);

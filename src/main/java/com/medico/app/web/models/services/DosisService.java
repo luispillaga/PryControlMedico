@@ -21,9 +21,8 @@ public class DosisService implements IDosisService {
     private IDosisDAO dao;
 
     @Override
-    public void save(Dosis medicamento) {
-        // TODO Auto-generated method stub
-        dao.save(medicamento);
+    public Dosis save(Dosis medicamento) {
+        return dao.save(medicamento);
     }
 
     @Override
@@ -48,6 +47,10 @@ public class DosisService implements IDosisService {
     @Transactional
     public List<Dosis> findNotTakenPills(Integer idDetalleReceta) {
         return dao.findNotTakenPills(idDetalleReceta);
+    }
+    
+    public List<Dosis> findAllOfOneDetail(Integer idDetalleReceta){
+    	return dao.findAllOfOneDetail(idDetalleReceta);
     }
 
     @Override

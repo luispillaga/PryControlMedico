@@ -15,9 +15,10 @@ public class MedicoService implements IMedicoService {
 	private IMedicoDAO dao;
 	
 	@Override
-	public void save(Medico medico) {
+	public Medico save(Medico medico) {
 
 		dao.save(medico);
+		return medico;
 	}
 
 	@Override

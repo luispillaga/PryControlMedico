@@ -9,6 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="DOSIS")
 public class Dosis implements Serializable {
@@ -44,6 +46,7 @@ public class Dosis implements Serializable {
 
 	@JoinColumn(name="IDDETALLERECETA", referencedColumnName = "IDDETALLERECETA")//claves foraneas
 	@ManyToOne
+	@JsonIgnore
 	private DetalleReceta detalleReceta;
 
 	public Dosis() {

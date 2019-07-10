@@ -21,9 +21,10 @@ public class PacienteService implements IPacienteService {
 	private IPacienteDAO dao;
 	
 	@Override
-	public void save(Paciente paciente) {
+	public Paciente save(Paciente paciente) {
 		// TODO Auto-generated method stub
 		dao.save(paciente);
+		return paciente;
 	}
 
 	@Override
@@ -45,6 +46,11 @@ public class PacienteService implements IPacienteService {
 	}
 
 	@Override
+	public List<Paciente> findPacientesActivos() {
+		return dao.findPacientesActivos();
+		//return (List<Paciente>) dao.findPacientesActivos();
+	}
+	
 	public List<PacienteRangoEdad> countPacientsByAgeRange() {
 		List<Paciente> pacientes = findAll();
 		LocalDate fechaActual = LocalDate.now();
