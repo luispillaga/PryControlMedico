@@ -1,6 +1,9 @@
 package com.medico.app.web.models.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +25,8 @@ import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="RECETA")
 public class Receta implements Serializable{
@@ -35,25 +40,30 @@ public class Receta implements Serializable{
 	private Integer idreceta;
 	
 	@Column(name = "FECHA")
-	@Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Past
-	private Date fecha;
+	private LocalDate fecha;
+
+	@Column(name = "ACTIVO")
+	private Boolean activo;
+	
 	
 	@JoinColumn(name="IDMEDICO", referencedColumnName = "IDPERSONA")
 	@ManyToOne
 	private Medico medico;
 	
+
 	@JoinColumn(name="IDPACIENTE", referencedColumnName = "IDPERSONA")
 	@ManyToOne
 	private Paciente paciente;
-	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "IDRECETA")
+
+	@JsonIgnore
+	@OneToMany(mappedBy="receta", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<DetalleReceta> detalles;
 	
+	
 	public Receta() {
-		
+		detalles = new ArrayList<DetalleReceta>();
 	}
 
 	public Receta(Integer idreceta) {
@@ -69,11 +79,11 @@ public class Receta implements Serializable{
 		this.idreceta = idreceta;
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 
@@ -100,5 +110,12 @@ public class Receta implements Serializable{
 	public void setDetalles(List<DetalleReceta> detalles) {
 		this.detalles = detalles;
 	}
-	
+
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
+	}
 }
